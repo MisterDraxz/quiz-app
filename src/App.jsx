@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './App.css';
 
 export default function App() {
   const [personality, setPersonality] = useState('');
@@ -39,41 +40,41 @@ export default function App() {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      style={{ padding: '2rem', maxWidth: '500px', margin: 'auto' }}
-    >
-      <h2>Select Your Personality Type</h2>
-      <select
-        value={personality}
-        onChange={(e) => setPersonality(e.target.value)}
-        required
-      >
-        <option value="">--Choose one--</option>
-        <option value="calm-observer">Calm Observer</option>
-        <option value="chaos-magnet">Chaos Magnet</option>
-        <option value="story-seeker">Story Seeker</option>
-        <option value="analyst">Analyst</option>
-      </select>
+    <div className="container">
+      <form className="quiz-form" onSubmit={handleSubmit}>
+        <h1>🧠 AI Personality Quiz</h1>
+        <p className="desc">Let AI match you to the news that actually matters to you.</p>
 
-      <h3 style={{ marginTop: '2rem' }}>Choose Your Interests</h3>
-      {allInterests.map((interest) => (
-        <div key={interest}>
-          <label>
-            <input
-              type="checkbox"
-              value={interest}
-              checked={interests.includes(interest)}
-              onChange={() => handleCheckbox(interest)}
-            />
-            {interest}
-          </label>
+        <label>Select Your Personality Type</label>
+        <select
+          value={personality}
+          onChange={(e) => setPersonality(e.target.value)}
+          required
+        >
+          <option value="">-- Choose one --</option>
+          <option value="chaos-magnet">Chaos Magnet</option>
+          <option value="story-seeker">Story Seeker</option>
+          <option value="calm-observer">Calm Observer</option>
+          <option value="Analyst">Analyst</option>
+        </select>
+
+        <h3 style={{ marginTop: '1.5rem' }}>Pick Your Interests</h3>
+        <div className="checkbox-grid">
+          {allInterests.map((interest) => (
+            <label key={interest} className="checkbox">
+              <input
+                type="checkbox"
+                value={interest}
+                checked={interests.includes(interest)}
+                onChange={() => handleCheckbox(interest)}
+              />
+              {interest}
+            </label>
+          ))}
         </div>
-      ))}
 
-      <button type="submit" style={{ marginTop: '2rem' }}>
-        Submit
-      </button>
-    </form>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
   );
 }
